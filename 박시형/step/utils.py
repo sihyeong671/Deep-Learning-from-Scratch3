@@ -28,19 +28,20 @@ class Variable:
     
     
 class Function:
-  def __call__(self, input: Variable):
-    x = input.data
-    y = self.forward(x)
-    output = Variable(self._as_array(y))
-    output.set_creator(self)
-    self.input = input
-    self.output = output
-    return output
+  def __call__(self, inputs):
+    xs = [x.data for x in inputs]
+    ys = self.forward(xs)
+    outputs = [Variable(self._as_array(y)) for y in ys]
+    for output in outputs:
+      output.set_creator(self)
+    self.inputs = inputs
+    self.outputs = outputs
+    return outputs
   
-  def forward(self, x):
+  def forward(self, xs):
     raise NotImplementedError
 
-  def backward(self, gy):
+  def backward(self, gys):
     raise NotImplementedError
   
   @staticmethod
