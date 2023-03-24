@@ -9,6 +9,6 @@
 
 ## 스터디 원
 - [강감찬]
-- [김나현]
+- [김나현](https://github.com/NaHyeon520)
 - [박시형](https://github.com/sihyeong671)
 - [백진규]
