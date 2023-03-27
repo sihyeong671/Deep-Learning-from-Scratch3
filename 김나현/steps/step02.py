@@ -1,6 +1,13 @@
 from step01 import Variable
 import numpy as np
-
+'''
+class Function:
+    def __call__(self, input):
+        x=input.data
+        y=x**2
+        output=Variable(y)
+        return output
+    '''
 class Function:
     def __call__(self, input):
         x=input.data
