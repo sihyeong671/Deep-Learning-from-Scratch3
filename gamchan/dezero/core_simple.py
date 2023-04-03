@@ -87,6 +87,8 @@ class Variable:
         
         while funcs:
             f = funcs.pop()
+            
+            # backpropagation(main process)
             gys = [output().grad for output in f.outputs]
             gxs = f.backward(*gys)
             if not isinstance(gxs, tuple):
@@ -124,6 +126,7 @@ class Function:
     def __call__(self, *inputs):
         inputs = [as_variable(x) for x in inputs]
         
+        # forward propagation(main process)
         xs = [x.data for x in inputs]
         ys = self.forward(*xs)
         if not isinstance(ys, tuple):
@@ -132,6 +135,7 @@ class Function:
         
         if Config.enable_backprop:
             self.generation = max([x.generation for x in inputs])
+            # create relationship between Function and Variable
             for output in outputs:
                 output.set_creator(self)
             self.inputs = inputs
