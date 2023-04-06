@@ -8,7 +8,7 @@
 2. 모르는 것 질문은 바로바로 카톡으로 하기
 
 ## 스터디 원
-- [강감찬]
+- [강감찬](https://github.com/gsgh3016)
 - [김나현](https://github.com/NaHyeon520)
 - [박시형](https://github.com/sihyeong671)
 - [백진규]
