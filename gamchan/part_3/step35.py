@@ -12,9 +12,12 @@ y = F.tanh(x)
 x.name = 'x'
 y.name = 'y'
 y.backward(create_graph=True)
-gx = x.grad
-x.cleargrad()
-gx.backward(create_graph=True)
+iter = 0
+
+for i in range(iter):
+    gx = x.grad
+    x.cleargrad()
+    gx.backward(create_graph=True)
     
 gx = x.grad
 gx.name = "gx0"
