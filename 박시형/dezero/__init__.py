@@ -21,5 +21,8 @@ else:
     as_variable,
     setup_variable
   )
+  from dezero.layers import Layer
+  from dezero.models import Model
+  import dezero.optimizers
 
 setup_variable()

@@ -9,11 +9,18 @@ class Layer:
     self._params = set()
     
   def __setattr__(self, name, value):
-    if isinstance(value, Parameter):
+    if isinstance(value, (Parameter, Layer)):
       self._params.add(name)
     
     super().__setattr__(name, value)
   
+  def params(self):
+    for name in self._params:
+      obj = self.__dict__[name]
+      if isinstance(obj, Layer):
+        yield from obj.params()
+      else:
+        yield obj
   
   def __call__(self, *inputs):
     outputs = self.forward(*inputs)
@@ -26,10 +33,6 @@ class Layer:
   
   def forward(self, inputs):
     raise NotImplementedError
-  
-  def params(self):
-    for name in self._params:
-      yield self.__dict__[name]
     
   def cleargrads(self):
     for param in self.params():
@@ -54,7 +57,7 @@ class Linear(Layer):
   
   
   def _init_W(self):
-    I, O = self.in_size, self.out_size
+    I, O = self.in_size, self.out_size 
     W_data = np.random.randn(I, O).astype(self.dtype) * np.sqrt(1 / I)
     self.W.data = W_data
     
